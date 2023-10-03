@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/composer_and_work_by_name', danielsRoutes)
+app.use('/daniels_query/', danielsRoutes)
 
 // app.use('/composer_and_work_by_name', (req, res, next) => {
   // console.log('Received request:', req.body);
