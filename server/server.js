@@ -18,32 +18,29 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/composer_and_work_by_name', async (req, res, next) => {
+app.use('/composer_and_work_by_name', async (req, res, next) => {
   const { composer, work } = req.body;
   console.log('here at composer and work');
   console.log(composer, work);
 
-  if (composer === null || work === null) {
-    return next({
-      log: 'error retrieving movie list in movieController.js',
-      status: 500,
-      message: { err: 'Unable to list movies' },
-    });
-  }
+  // if (composer === null || work === null) {
+  //   return next({
+  //     log: 'error retrieving movie list in movieController.js',
+  //     status: 500,
+  //     message: { err: 'Unable to list movies' },
+  //   });
+  // }
 
-  try {
-    const response = await axios.get(searchComposerAndWork, {
-      composer,
-      work,
-      userId,
-      token,
-    });
+  // try {
+  //   const response = await axios.get(searchComposerAndWork, {
+  //     headers: { composer, work, userId, token },
+  //   });
 
-    res.status(201).json({ work_detail: response.data });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred' });
-  }
+  //   res.status(201).json({ work_detail: response.data });
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ error: 'An error occurred' });
+  // }
 });
 
 app.use('/testfetch', async (req, res) => {
