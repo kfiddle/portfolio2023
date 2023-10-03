@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const axios = require('axios'); // Import Axios
+const axios = require('axios');
 
 app.use(bodyParser.json());
+
+const danielsRoutes = require('./routers/daniels-routes.js');
 
 const searchComposerAndWork = 'https://api.daniels-orchestral.com/v3/search';
 const userId = '6434';
@@ -18,10 +20,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/composer_and_work_by_name', async (req, res, next) => {
-  const { composer, work } = req.body;
-  console.log('here at composer and work');
-  console.log(composer, work);
+app.use('/composer_and_work_by_name', danielsRoutes)
+
+// app.use('/composer_and_work_by_name', (req, res, next) => {
+  // console.log('Received request:', req.body);
+  // const { composer, work } = req.body;
 
   // if (composer === null || work === null) {
   //   return next({
@@ -41,7 +44,7 @@ app.use('/composer_and_work_by_name', async (req, res, next) => {
   //   console.error(error);
   //   res.status(500).json({ error: 'An error occurred' });
   // }
-});
+// });
 
 app.use('/testfetch', async (req, res) => {
   const danielsSingleWork = 'https://api.daniels-orchestral.com/v3/fetch';
